@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>bullshit jobs generator</title>
+		<meta name="Description" content="powerpoint karaoke chooser" />
+		<link href="normalize.min.css" rel="stylesheet" type="text/css" media="all" />
+	</head>
+
+	<body style="font-family:Helvetica;font-weight:bold;text-align:center;margin: 40px auto;">
+		<input type="button" onClick="generateJob();" value="générer un bullshit job">
+		<h2 id="job-container"></h2>
+	</body>
+
+	<script>
+		const data = [
+			[
+				"chief",
+				"senior",
+				"junior",
+				"data",
+				"lead",
+				"game-changing",
+				"e-",
+				"digital",
+				"agile"
+			],
+			[
+				"happiness",
+				"technical",
+				"marketing",
+				"growth",
+				"executive",
+				"project",
+				"projects",
+				"HR",
+				"PR",
+				"data",
+				"office"
+			],
+			[
+				"officer",
+				"manager",
+				"hacker",
+				"guru", 
+				"analyst", 
+				"evangelist",
+				"facilitator",
+				"strategist",
+				"specialist",
+				"scientist",
+				"expert"
+			]
+		]
+		function generateJob() {
+			let job = "";
+			data.forEach(subData => {
+				newPart = subData[Math.floor(Math.random() * subData.length)];
+				if (job.substr(-1) === "-") {
+					job = job + newPart;
+				} else {
+					job = job + " " + newPart;
+				}
+			});
+			document.getElementById("job-container").innerHTML = job
+		}
+	</script>
+
+</html>
