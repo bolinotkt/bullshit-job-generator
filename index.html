@@ -14,56 +14,32 @@
 	</body>
 
 	<script>
-		const data = [
-			[
-				"chief",
-				"senior",
-				"junior",
-				"data",
-				"lead",
-				"game-changing",
-				"e-",
-				"digital",
-				"agile"
-			],
-			[
-				"happiness",
-				"technical",
-				"marketing",
-				"growth",
-				"executive",
-				"project",
-				"projects",
-				"HR",
-				"PR",
-				"data",
-				"office"
-			],
-			[
-				"officer",
-				"manager",
-				"hacker",
-				"guru", 
-				"analyst", 
-				"evangelist",
-				"facilitator",
-				"strategist",
-				"specialist",
-				"scientist",
-				"expert"
-			]
-		]
 		function generateJob() {
-			let job = "";
-			data.forEach(subData => {
-				newPart = subData[Math.floor(Math.random() * subData.length)];
-				if (job.substr(-1) === "-") {
-					job = job + newPart;
+			let request = new XMLHttpRequest();
+			request.open('GET', 'data.json', true);
+			request.onload = function() {
+				if (request.status >= 200 && request.status < 400) {
+					// Success!
+					let data = JSON.parse(request.responseText);
+					let job = "";
+					data.forEach(subData => {
+						newPart = subData[Math.floor(Math.random() * subData.length)];
+						if (job.substr(-1) === "-") {
+							job = job + newPart;
+						} else {
+							job = job + " " + newPart;
+						}
+					});
+					job = job.charAt(1).toUpperCase() + job.slice(2);
+					document.getElementById("job-container").innerHTML = job;
 				} else {
-					job = job + " " + newPart;
+					console.log("Data file found, but error.")
 				}
-			});
-			document.getElementById("job-container").innerHTML = job
+			};
+			request.onerror = function() {
+				console.log("Data file not found.")
+			};
+			request.send();
 		}
 	</script>
 
