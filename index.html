@@ -24,13 +24,13 @@
 					let job = "";
 					data.forEach(subData => {
 						newPart = subData[Math.floor(Math.random() * subData.length)];
-						if (job.substr(-1) === "-") {
+						if (!job.substr(-1) || job.substr(-1) === "-") {
 							job = job + newPart;
 						} else {
 							job = job + " " + newPart;
 						}
 					});
-					job = job.charAt(1).toUpperCase() + job.slice(2);
+					job = job.charAt(0).toUpperCase() + job.slice(1);
 					document.getElementById("job-container").innerHTML = job;
 				} else {
 					console.log("Data file found, but error.")
